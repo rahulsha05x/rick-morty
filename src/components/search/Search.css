@@ -1,0 +1,25 @@
+.Search {
+    display: flex;
+    flex-wrap: nowrap;
+}
+.Search__Input {
+    margin: 10px 8px;
+    border: 1px solid rgba(0,0,0,.12);
+    border-radius: 15px;
+    color: #232f34;
+    width: 250px;
+    padding: 10px;
+    font-weight: 700;
+}
+
+.Search__Button {
+    width: 90px;
+    min-height: 40px;
+    font-weight: 700;
+    margin: 10px 8px;
+    border: 1px solid rgba(0,0,0,.12);
+    border-radius: 15px;
+    background: #f9aa33;
+    color: #232f34;
+    cursor: pointer;
+}

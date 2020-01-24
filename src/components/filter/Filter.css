@@ -1,0 +1,35 @@
+.Filter__Select {
+    margin-top: 2rem;
+    margin-left: 8px;
+    margin-right: 8px;
+    border: 1px solid rgba(0,0,0,.12);
+    border-radius: 15px;
+    color: #232f34;
+    width: 250px;
+    padding: 10px;
+    font-weight: 700;
+    height:45px;
+}
+
+.Filter {
+    display: flex;
+    flex-direction: column;
+}
+
+.Filter__List {
+    list-style: none;
+    padding-left: 2px;
+}
+.Filter__List__wrapper {
+    margin-left: 8px;
+    margin-right: 8px;
+    border: 1px solid rgba(0,0,0,.12);
+}
+.Filter__List li:hover {
+    color:white;
+    background-color: blue;
+}
+.Filter__List li:active {
+    color:white;
+    background-color: yellow;
+}
