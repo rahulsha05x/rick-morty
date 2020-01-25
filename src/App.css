@@ -32,6 +32,7 @@
   color:white;
   background-color: yellow;
 }
+
 @media(min-width:500px) {
   .App {
     max-width: 1380px;

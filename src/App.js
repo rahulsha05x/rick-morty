@@ -15,6 +15,26 @@ class App extends Component {
   componentDidMount() {
     this.loadData();
   }
+  shouldComponentUpdate(nextProps,nextStates) {
+    if(nextStates.sortBy === 'id' && nextStates.sortDirection === 'asc') {
+      return true;
+    }
+    if(this.state.characters !== nextStates.characters) {
+      return true;
+    }
+    if(this.state.sortBy !== nextStates.sortBy ||
+      this.state.sortDirection !== nextStates.sortDirection ) {
+        return true;
+      }
+      return false;
+  }
+  componentDidUpdate(prevProps,prevState) {
+    
+    if(this.state.sortBy !== prevState.sortBy ||
+      this.state.sortDirection !== prevState.sortDirection ) {
+        this.sortResults(this.state.sortBy,this.state.sortDirection);
+      }
+  }
   loadData() {
     axios.get('https://rickandmortyapi.com/api/character/ ').then(
       response =>{
@@ -44,27 +64,24 @@ class App extends Component {
     }
   }
   sortHandler = (e,h)=>{
-    this.setState((prevState)=>{
-      if(prevState.sortDirection !== e) {
-        return {sortBy:e}
-      }
-    });
-    this.sortHandler(this.state.sortBy,this.state.direction)
-    
+    this.setState({sortBy:e})
   }
-  changeSorter(v) {
-    this.setState((prevState)=>{
-      if(prevState.sortDirection !== v) {
-        return {sortDirection:v}
-      }
-    });
-    this.sortHandler(this.state.sortBy,this.state.direction)
+  changeSorter(e, v) {
+    const allSiblings = e.currentTarget.parentNode.children;
+    for(let s of allSiblings) {
+      s.style.backgroundColor = 'white';
+      s.style.color = 'black';
+    }
+    e.target.style.backgroundColor = 'blue';
+    e.target.style.color = 'white';
+    this.setState({sortDirection:v});
   }
   sortResults(by, direction) {
+    const _characters = [...this.state.characters];
     if (by === 'name') {
-      const characters = this.state.characters.slice();
+      
       if(direction === 'asc') {
-        characters.sort((a,b)=>{
+        _characters.sort((a,b)=>{
           if (a['name'] < b['name']) {
             return -1;
         }
@@ -76,7 +93,7 @@ class App extends Component {
         
       } 
       if(direction === 'dsc') {
-        characters.sort((a,b)=>{
+        _characters.sort((a,b)=>{
           if (a['name'] > b['name']) {
             return -1;
         }
@@ -87,27 +104,28 @@ class App extends Component {
         });
         
       }
-      this.setState({characters:characters});
+      this.setState({characters:_characters});
       
     }
     if (by === 'id') {
 
-      const characters = this.state.characters.slice();
+      
       if(direction === 'asc') {
-        characters.sort((a,b)=>{
+        _characters.sort((a,b)=>{
           return a['id'] - b['id'];
         });
       }
       if(direction === 'dsc') {
-        characters.sort((a,b)=>{
+        _characters.sort((a,b)=>{
           return b['id'] - a['id'];
         });
       }
       
-      this.setState({characters:characters})
+      this.setState({characters:_characters})
     }
   }
   render() {
+    console.log("[Render]")
     return (
       
         <Layout>
@@ -121,10 +139,10 @@ class App extends Component {
                 <Filter sortHandler={this.sortHandler}/>
                 <div className={classes.Filter__List__wrapper}>
                   <ul className={classes.Filter__List}>
-                    <li onClick={()=>this.changeSorter('asc')}>Ascending</li>
-                    <li onClick={()=>this.changeSorter('dsc')}>Descending</li>
+                    <li style={{backgroundColor:'blue',color:'white'}}onClick={(e)=>this.changeSorter(e,'asc')}>Ascending</li>
+                    <li onClick={(e)=>this.changeSorter(e,'dsc')}>Descending</li>
                   </ul>
-                </div>
+              </div>
               </div>
               
             </div>
