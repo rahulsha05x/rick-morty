@@ -9,7 +9,8 @@ class Search extends Component {
     render(){
         return (
         <form className={classes.Search} >
-            <input type='text' placeholder='Name' onChange={(event)=> this.setState({searchText:event.target.value})}name='searchText' className={classes.Search__Input}/>
+            <input type='text' placeholder='Name' onChange={(event)=> this.setState({searchText:event.target.value})}
+            name='searchText' className={classes.Search__Input}/>
             <button className={classes.Search__Button} onClick={(event)=> this.props.searchHandler(event,this.state.searchText)}>Search</button>
             
         </form>

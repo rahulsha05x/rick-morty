@@ -58,6 +58,8 @@ class App extends Component {
       
       if(filteredResult && filteredResult.length ) {
         this.setState({characters:filteredResult});
+      } else {
+        this.setState({characters:[]});
       }
     } else {
       this.loadData();
@@ -125,7 +127,8 @@ class App extends Component {
     }
   }
   render() {
-    
+    const _character = this.state.characters.length ? <Characters characters={this.state.characters}/>:
+    <div className={classes.Text}>No character found.</div>
     return (
       
         <Layout>
@@ -146,8 +149,9 @@ class App extends Component {
               </div>
               
             </div>
+            
             <div className={classes.App__Characters}>
-              <Characters characters={this.state.characters}/>
+              {_character}
             </div>
           </div>
         </Layout>
