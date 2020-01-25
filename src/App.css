@@ -17,7 +17,8 @@
 
 .Filter__List {
   list-style: none;
-  padding-left: 2px;
+  padding-left: 0px;
+  background-color: white;
 }
 .Filter__List__wrapper {
   margin-left: 8px;
