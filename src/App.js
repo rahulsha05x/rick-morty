@@ -45,7 +45,7 @@ class App extends Component {
   }
   searchHandler = (event,search)=>{
     event.preventDefault();
-    console.log(search);
+  
     const characters = [...this.state.characters];
     if(search && search.length >= 3) {
       
@@ -55,7 +55,7 @@ class App extends Component {
         }
         return null;
       });
-      console.log(filteredResult)
+      
       if(filteredResult && filteredResult.length ) {
         this.setState({characters:filteredResult});
       }
@@ -125,7 +125,7 @@ class App extends Component {
     }
   }
   render() {
-    console.log("[Render]")
+    
     return (
       
         <Layout>
